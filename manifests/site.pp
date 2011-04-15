@@ -60,6 +60,10 @@ node 'srvb.zen' inherits basenode {
     notify{"Entering srvb.zen node": }
 }
 
+node 'neo.zen' inherits basenode {
+    notify{"Entering neo.zen node": }
+}
+
 node 'dtpb.zen' inherits basenode {
     notify{"Entering dtpb.zen node": }
 }
