@@ -34,9 +34,17 @@ define buildout($buildoutcfg, $ensure=present) {
 }
 
 
+class global-buildout {
+    buildout { "/usr/local/buildout-main":
+        buildoutcfg => "puppet:///files/zc.buildout/buildout-main.cfg"
+    }
+}
+
+
 # nodes definition
 
 node basenode {
+    include global-buildout
 }
 
 node 'srvb.zen' inherits basenode {
