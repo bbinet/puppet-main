@@ -4,6 +4,11 @@ HOME=/root
 
 profile=$1
 new=$2
+<% if fqdn == "dtpb.zen" -%>
+sync_host="neo.zen"
+<% else -%>
+sync_host="dtpb.zen"
+<% end -%>
 
 # ensure last_synchro/$profile exists
 if [ ! -f /root/.unison/last_synchro/$profile.epoch ]; then
@@ -27,7 +32,7 @@ fi
 
 # process unison
 rm -f /root/.unison/synchro_required/$profile
-output=$(unison $profile && ssh neo "unison $profile" 2>&1)
+output=$(unison $profile && ssh $sync_host "unison $profile" 2>&1)
 ret=$?
 
 epoch=$(date "+%s")
