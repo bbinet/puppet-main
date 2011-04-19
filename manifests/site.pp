@@ -46,14 +46,21 @@ node basenode {
     include puppet-agent
 }
 
-node 'srvb.zen' inherits basenode {
+node desktopnode inherits basenode {
+    include supervisor-nosier-conf
+}
+
+node servernode inherits basenode {
+}
+
+node 'srvb.zen' inherits servernode {
     notify{"Entering srvb.zen node": }
 }
 
-node 'neo.zen' inherits basenode {
+node 'neo.zen' inherits desktopnode {
     notify{"Entering neo.zen node": }
 }
 
-node 'dtpb.zen' inherits basenode {
+node 'dtpb.zen' inherits desktopnode {
     notify{"Entering dtpb.zen node": }
 }
