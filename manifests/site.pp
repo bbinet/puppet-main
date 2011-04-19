@@ -3,7 +3,6 @@ Exec {
 }
 
 
-include buildout
 class global-buildout {
     buildout::venv { "/usr/local/buildout-main":
         source => "puppet:///files/zc.buildout/buildout-main.cfg"
