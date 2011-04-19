@@ -1,0 +1,9 @@
+# Roots of the synchronization
+root = /
+root = ssh://srvb//
+
+# Paths to synchronize 
+path = home/data/films_perso
+
+# Include the contents of the file common
+include common

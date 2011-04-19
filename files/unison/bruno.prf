@@ -1,0 +1,11 @@
+# Roots of the synchronization
+root = /
+root = ssh://srvb//
+
+# Paths to synchronize 
+path = home/bruno/Desktop
+
+ignore = Path home/bruno/Desktop/Import
+
+# Include the contents of the file common
+include common

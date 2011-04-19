@@ -1,0 +1,9 @@
+# Roots of the synchronization
+root = /
+root = ssh://srvb//
+
+# Paths to synchronize 
+path = home/data/websites
+
+# Include the contents of the file common
+include common

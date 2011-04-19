@@ -1,0 +1,44 @@
+# Some general regexps specifying names to ignore
+ignore = Path home/bruno/Desktop/Import
+ignore = Name *~
+ignore = Name .*~
+ignore = Name .*.swp
+ignore = Name *.o
+ignore = Name *.pyc
+
+# non interactive mode
+batch = true
+# skip asking for confirmations on non-conflicting changes
+auto = true
+# request an extra confirmation if it appears that the entire replica or for
+# top-level paths has been deleted
+#confirmbigdeletes = true
+# file modification times (but not directory modtimes) are propagated
+times = true
+# group attributes of the files are synchronized
+group = true
+# owner attributes of the files are synchronized
+owner = true
+# integer value of this preference is a mask indicating which permission bits
+# should be synchronized. If you want to synchronize all bits, you can set
+# the value of this preference to -1
+perms = -1
+# groups and users are synchronized numerically, rather than by name
+#numericids = false
+# list changed files by size (smallest first) rather than by name so that
+# smaller files are being transferred quickly
+sortbysize = true
+# use the modification time and length of a file instead of reading the full
+# contents of every file
+fastcheck = true
+# prefer newer version of files in case of conflicts
+prefer = newer
+# keep a backup copy of every file in a central location
+backuplocation = central
+backupdir = /root/.unison/backups
+backup = Name *
+
+# log all changes to the filesystems on a file
+log = true
+logfile = /var/log/unison.log
+
