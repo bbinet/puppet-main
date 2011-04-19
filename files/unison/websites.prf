@@ -5,5 +5,10 @@ root = ssh://srvb//
 # Paths to synchronize 
 path = home/data/websites
 
+# Some regexps specifying names to ignore
+ignore = Name beaker
+ignore = Name *.log
+ignore = Name .svn
+
 # Include the contents of the file common
 include common
