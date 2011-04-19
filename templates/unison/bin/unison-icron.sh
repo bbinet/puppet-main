@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+USER=root
+HOME=/root
+
+profile=$1
+new=$2
+
+# ensure last_synchro/$profile exists
+if [ ! -f /root/.unison/last_synchro/$profile.epoch ]; then
+    echo "0" > /root/.unison/last_synchro/$profile.epoch
+fi
+# check if a synchro is required
+if [ -n "$new" ]; then
+    touch /root/.unison/synchro_required/$profile
+fi
+# exit immediately if synchro is not required
+if [ ! -f /root/.unison/synchro_required/$profile ]; then
+    exit 0
+fi
+
+# reschedule script to now + 1min if already running
+ps -fu root | grep -v grep | grep "unison $profile" > /dev/null
+if [ $? -eq 0 ]; then
+    echo "$0 $profile" | at now+1min
+    exit 0
+fi
+
+# process unison
+rm -f /root/.unison/synchro_required/$profile
+output=$(unison $profile && ssh neo "unison $profile" 2>&1)
+ret=$?
+
+epoch=$(date "+%s")
+# overwrite last_synchro/$profile.epoch if successful
+if [ $ret -eq 0 ]; then
+    echo $epoch > /root/.unison/last_synchro/$profile.epoch
+else
+    touch /root/.unison/synchro_required/$profile
+    # reschedule script to now + 1hour if failed
+    echo "$0 $profile" | at now+1hour
+    last_synchro=$(cat /root/.unison/last_synchro/$profile.epoch)
+    duration=$(($epoch - $last_synchro))
+    # last synchro > 1 day
+    if [ $duration -gt 86400 ]; then
+        echo $output | mail bruno@localhost -s "[unison $profile] Error $(date '+%d/%m/%y %H:%M')"
+        echo $epoch > /root/.unison/last_synchro/$profile.epoch
+    fi
+fi
+
+exit $ret
