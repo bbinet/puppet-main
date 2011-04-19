@@ -18,6 +18,27 @@ class puppet-agent {
 }
 
 
+class supervisor-nosier-conf {
+    file {"/etc/supervisor/conf.d/nosier-bruno.conf":
+        source => "puppet:///files/supervisor/conf.d/nosier-bruno.conf"
+    }
+    file {"/etc/supervisor/conf.d/nosier-clemence.conf":
+        source => "puppet:///files/supervisor/conf.d/nosier-clemence.conf"
+    }
+    file {"/etc/supervisor/conf.d/nosier-films_perso.conf":
+        source => "puppet:///files/supervisor/conf.d/nosier-films_perso.conf"
+    }
+    file {"/etc/supervisor/conf.d/nosier-photos.conf":
+        source => "puppet:///files/supervisor/conf.d/nosier-photos.conf"
+    }
+    file {"/etc/supervisor/conf.d/nosier-videos.conf":
+        source => "puppet:///files/supervisor/conf.d/nosier-videos.conf"
+    }
+    file {"/etc/supervisor/conf.d/nosier-websites.conf":
+        source => "puppet:///files/supervisor/conf.d/nosier-websites.conf"
+    }
+}
+
 # nodes definition
 
 node basenode {
