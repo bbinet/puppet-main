@@ -17,6 +17,30 @@ class puppet-agent {
     }
 }
 
+class unison-conf {
+    file {"/root/.unison/bruno.prf":
+        source => "puppet:///files/unison/bruno.prf"
+    }
+    file {"/root/.unison/clemence.prf":
+        source => "puppet:///files/unison/clemence.prf"
+    }
+    file {"/root/.unison/films_perso.prf":
+        source => "puppet:///files/unison/films_perso.prf"
+    }
+    file {"/root/.unison/photos.prf":
+        source => "puppet:///files/unison/photos.prf"
+    }
+    file {"/root/.unison/videos.prf":
+        source => "puppet:///files/unison/videos.prf"
+    }
+    file {"/root/.unison/websites.prf":
+        source => "puppet:///files/unison/websites.prf"
+    }
+    file {"/root/.unison/common":
+        source => "puppet:///files/unison/common"
+    }
+}
+
 
 class supervisor-nosier-conf {
     file {"/etc/supervisor/conf.d/nosier-bruno.conf":
@@ -47,6 +71,7 @@ node basenode {
 }
 
 node desktopnode inherits basenode {
+    include unison-conf
     include supervisor-nosier-conf
 }
 
