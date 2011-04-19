@@ -63,6 +63,13 @@ class supervisor-nosier-conf {
     }
 }
 
+
+class unison-icron-bin {
+    file {"/usr/local/bin/unison-icron.sh":
+        content => template("unison/bin/unison-icron.sh.erb")
+    }
+}
+
 # nodes definition
 
 node basenode {
@@ -73,6 +80,7 @@ node basenode {
 node desktopnode inherits basenode {
     include unison-conf
     include supervisor-nosier-conf
+    include unison-icron-bin
 }
 
 node servernode inherits basenode {
