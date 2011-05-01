@@ -1,3 +1,7 @@
+#
+# ** THIS FILE IS MANAGED BY PUPPET **
+# ** Do not edit manually **
+#
 ##############################################################################
 #
 # Copyright (c) 2006 Zope Foundation and Contributors.

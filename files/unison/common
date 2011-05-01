@@ -1,3 +1,7 @@
+#
+# ** THIS FILE IS MANAGED BY PUPPET **
+# ** Do not edit manually **
+#
 # Some general regexps specifying names to ignore
 ignore = Path home/bruno/Desktop/Import
 ignore = Name *~
