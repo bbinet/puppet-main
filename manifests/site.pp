@@ -66,7 +66,8 @@ class supervisor-nosier-conf {
 
 class unison-icron-bin {
     file {"/usr/local/bin/unison-icron.sh":
-        content => template("unison/bin/unison-icron.sh.erb")
+        content => template("unison/bin/unison-icron.sh.erb"),
+        mode => 755,
     }
 }
 
