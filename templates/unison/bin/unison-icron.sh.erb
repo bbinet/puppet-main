@@ -36,14 +36,19 @@ fi
 
 # process unison
 rm -f /root/.unison/synchro_required/$profile
-output=$(unison $profile && ssh $sync_host "unison $profile" 2>&1)
+output=$(unison $profile 2>&1) > /dev/null
 ret=$?
 
 epoch=$(date "+%s")
 # overwrite last_synchro/$profile.epoch if successful
 if [ $ret -eq 0 ]; then
+    ssh $sync_host "unison $profile" 2>&1 > /dev/null
     echo $epoch > /root/.unison/last_synchro/$profile.epoch
 else
+    # exit immediately if synchro is already required
+    if [ ! -f /root/.unison/synchro_required/$profile ]; then
+        exit 0
+    fi
     touch /root/.unison/synchro_required/$profile
     # reschedule script to now + 1hour if failed
     echo "$0 $profile" | at now+1hour
@@ -56,4 +61,4 @@ else
     fi
 fi
 
-exit $ret
+exit 0
